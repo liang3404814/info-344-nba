@@ -59,21 +59,31 @@ nbaApp.directive('nbaPlayerNewsImage', function(){
 				var results = data["results"][0];
 				console.log(results);
 
+				var cleanedresults = [];
+
 				for (var i = 0; i < results.length; i++) {
 					results[i] = results[i]["metadata"];
 					results[i] = results[i]['media'];
+					var uri = results[i]["600x336"]["uri"];
+					if (uri != "") {
+						cleanedresults.push(uri);
+					}
 				};
 
 				var length = results.length;
 
 				// making sure number of photos is multiples of five
-				if (length > 5 && length % 5 != 0) {
-					results.splice(length - 1 - length % 5, length % 5);
+				if (length >= 5) {
+					if (length % 5 != 0) {
+						results.splice(length - 1 - length % 5, length % 5);
+					}
+				} else {
+					results = [];
 				}
 
-				console.log(results);
+				console.log(cleanedresults);
 
-				$scope.playerNewsImages = results;
+				$scope.playerNewsImages = cleanedresults;
 			}
 
 		},
