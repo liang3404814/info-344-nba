@@ -1,0 +1,69 @@
+<!-- <div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{playerDetails.fullName}}</h3>
+			</div>
+			<div class="panel-body">
+				<p>{{playerDetails}}</p>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<div class="player-profile">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="player-head-pic">
+					<nba-player-head-image player-name="{{playerDetails.fullName}}">
+				</div>
+			</div>
+			<div class="col-sm-8">
+				<div class="row">
+					<div class="player_name">
+						<h2>{{playerDetails.fullName}}</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="player_stats">
+						<div class="col-xs-2">
+							<div class="row">
+								<h3 class="player_metric_field">GP</h3>
+								<h4 class="player_metric_value">{{playerDetails.GP}}</h4>
+							</div>
+						</div>
+						<div class="col-xs-2">
+							<div class="row">
+								<h3 class="player_metric_field">FGP</h3>
+								<h4 class="player_metric_value">{{playerDetails.FGP}}</h4>
+							</div>
+						</div>
+						<div class="col-xs-2">
+							<div class="row">
+								<h3 class="player_metric_field">TPP</h3>
+								<h4 class="player_metric_value">{{playerDetails.TPP}}</h4>
+							</div>
+						</div>
+						<div class="col-xs-2">
+							<div class="row">
+								<h3 class="player_metric_field">FTP</h3>
+								<h4 class="player_metric_value">{{playerDetails.FTP}}</h4>
+							</div>
+						</div>
+						<div class="col-xs-2">
+							<div class="row">
+								<h3 class="player_metric_field">PPG</h3>
+								<h4 class="player_metric_value">{{playerDetails.PPG}}</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 
+<!-- end of player profile -->
+<div class="player-images">
+	<nba-player-news-image player-name="{{playerDetails.fullName}}">
+</div>
