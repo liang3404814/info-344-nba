@@ -1,42 +1,60 @@
-<html lang="en">
+<html lang="en" ng-app="nbaApp">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="css/ngprogress-lite.css">
 
 		<title>NBAInsight</title>
 
 	</head>
 	<body>
 		<header>
-			<nav class="navbar navbar-default" role="navigation">
+			<!-- <nav class="navbar navbar-default" role="navigation">
 				<div class="navbar-header">
 					<a href="#" class="navbar-brand">NBAInsight</a>
 					<p class="navbar-text">The last place you need to remember for NBA stats and insights</p>
 				</div>
-			</nav>
+			</nav> -->
 		</header>
 
-		<div class="nba-stat-container">
+		<div class="nba-stat-container" ng-controller="searchControl">
 			<div class="container">
 				<div class="row">
 					<div class="search-prompt col-md-12">
-						<h1 class="text-center">NBAInsight</h1>
+						<h1 class="text-center"><em>Which</em> player?</h1>
 					</div>
 				</div>
 				<div class="row">
 					<div class="search_box-container col-md-6 col-md-offset-3">
-						<input type="text" class="form-control" placeholder="Who's on your mind?">
+						<input type="text" class="form-control" placeholder="Start Typing" ng-model="selectedPlayer" typeahead="player as player.fullName for player in fuzzy_matched_players($viewValue) | limitTo: 8" typeahead-editable='false' typeahead-on-select="onSelect($item, $model, $label)">
 					</div>
 				</div>
+				<!-- <div class="row">
+					<h3 class="text-center">You selected: {{selectedPlayer.fullName}} ({{selectedPlayer.id}})</h3>
+				</div> -->
 			</div>
 		</div>
 
+		<div class="main-content">
+			<section ui-view></section>
+		</div>
 
-		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
+		<footer>
+			
+		</footer>
+		
+
+
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+		<script src="js/ngprogress-lite.min.js"></script>
+		<!-- <script src="http://code.angularjs.org/1.2.7/angular-route.min.js"></script> -->
+		<script src="js/angular-ui-router.js"></script>
 		<script src="js/ui-bootstrap-tpls-0.10.0.js" charset="utf-8" ></script>
+		<script src="js/fuse.js" charset="utf-8" ></script>
+		<script src="js/script.js" charset="utf-8" ></script>
 	</body>
 </html>
 

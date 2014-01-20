@@ -1,0 +1,49 @@
+h2, h3, h4, h5, h6 {
+	color: #F0F1F3;
+}
+
+body {
+	background-color: #F0F1F3;
+}
+
+.nba-stat-container {
+	margin-top: 100px;
+}
+
+.main-content {
+	margin-top: 80px;
+}
+
+.search-prompt h1 {
+	font-weight: bold;
+	font-size: 80;
+}
+
+.player-profile {
+	background-color: #29A6FF;
+	/*min-height: 400px;*/	
+}
+
+.player-profile .player_name h2 {
+	font-size: 60px;
+	font-weight: 300;
+}
+
+.player_name,
+.player_metric_field,
+.player_metric_value {
+	text-shadow: 0px 1px 2px rgba(0, 0, 0, 1);
+}
+
+.player-images {
+	background-color: #FF5C84;
+}
+
+.player-images img {
+	width: 20%;
+}
+
+
+footer {
+	min-height: 120px;
+}
