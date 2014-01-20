@@ -8,6 +8,15 @@ body {
 /*	background-color: #F0F1F3; */
 }
 
+
+/*.big-text {
+	font-size: 120px;
+}
+
+.small-text {
+	font-size: 60px;
+}*/
+
 .search_box-container .form-control {
 	height: 60px;
 	text-align: center;
@@ -17,6 +26,12 @@ body {
 	border: none;
 	box-shadow: none;
 	-webkit-box-shadow: none;
+
+	-webkit-transition: all .3s ease-out;
+	-moz-transition: all .3s ease-out;
+	-ms-transition: all .3s ease-out;
+	-o-transition: all .3s ease-out;
+	transition: all .3s ease-out;
 }
 
 .search_box-container .form-control:focus::-webkit-input-placeholder {
@@ -56,7 +71,8 @@ body {
 
 .search-prompt h1 {
 	/*font-weight: bold;*/
-	font-size: 120;
+	
+	font-size: 120px;
 	font-family: 'Squada One';
 	-webkit-transition: all .3s ease-out;
 	-moz-transition: all .3s ease-out;
@@ -64,6 +80,7 @@ body {
 	-o-transition: all .3s ease-out;
 	transition: all .3s ease-out;
 }
+
 
 .player-profile {
 	background-color: #29A6FF;

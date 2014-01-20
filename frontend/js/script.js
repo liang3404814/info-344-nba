@@ -149,38 +149,50 @@ function playerDetailControl () {
 function searchControl ($scope, $http, $state, $location,  $anchorScroll) {
 	
 
-	// $http.get('../backend/players-api.php?action=get_players').success(function(data) {
-		
-	// 	$scope.playerNames = data["content"];
-	// 	// console.log($scope.playerNames);
-	// 	// console.log($scope.fuzzy_matched_players("lebron"));
-	// });
+		// $http.get('../backend/players-api.php?action=get_players').success(function(data) {
+			
+		// 	$scope.playerNames = data["content"];
+		// 	// console.log($scope.playerNames);
+		// 	// console.log($scope.fuzzy_matched_players("lebron"));
+		// });
 
-$http.get('../backend/players-api.php', {
-	params: {"action": "get_players"}
-}).success(function(data) {
-	$scope.playerNames = data["content"];
-});
+	$http.get('../backend/players-api.php', {
+		params: {"action": "get_players"}
+	}).success(function(data) {
+		$scope.playerNames = data["content"];
+	});
 
 
-$scope.fuzzy_matched_players = function(name) {
+	$scope.fuzzy_matched_players = function(name) {
 
-	var options = {
-		keys: ['firstName', 'lastName']
-	}
+		var options = {
+			keys: ['firstName', 'lastName']
+		}
 
-	var f = new Fuse($scope.playerNames, options);
-	var result = f.search(name);
+		var f = new Fuse($scope.playerNames, options);
+		var result = f.search(name);
 
-	return result;
-};
+		return result;
+	};
 
-$scope.onSelect = function($item, $model, $label) {
-	var params = {
-		playerId: $item.id
-	}
+	$scope.onSelect = function($item, $model, $label) {
+		var params = {
+			playerId: $item.id
+		}
 
-	$state.go('playerDetailView', params);
-}
+		$scope.selectedPlayer = "";
+		$state.go('playerDetailView', params);
+	};
+
+	$scope.focusSearch = function() {
+		console.log("focused");
+		$scope.searchFocused = true;
+		$scope.selectedPlayer = "";
+	};
+
+	$scope.leaveSearch = function() {
+		console.log("defocused");
+		$scope.searchFocused = true;
+	};
 
 }
