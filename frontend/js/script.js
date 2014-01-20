@@ -44,7 +44,7 @@ nbaApp.directive('nbaPlayerNewsImage', function(){
 				"text": name, 
 				"type": "playerpage",
 				"start": 1,
-				"npp": 10,
+				"npp": 20,
 				"site": "nba",
 				"hide": "true",
 				"sort": "relevance",
@@ -63,6 +63,13 @@ nbaApp.directive('nbaPlayerNewsImage', function(){
 					results[i] = results[i]["metadata"];
 					results[i] = results[i]['media'];
 				};
+
+				var length = results.length;
+
+				// making sure number of photos is multiples of five
+				if (length > 5 && length % 5 != 0) {
+					results.splice(length - 1 - length % 5, length % 5);
+				}
 
 				console.log(results);
 
