@@ -70,15 +70,15 @@ nbaApp.directive('nbaPlayerNewsImage', function(){
 					}
 				};
 
-				var length = results.length;
+				var length = cleanedresults.length;
 
 				// making sure number of photos is multiples of five
 				if (length >= 5) {
 					if (length % 5 != 0) {
-						results.splice(length - 1 - length % 5, length % 5);
+						cleanedresults.splice(length - 1 - length % 5, length % 5);
 					}
 				} else {
-					results = [];
+					cleanedresults = [];
 				}
 
 				console.log(cleanedresults);
