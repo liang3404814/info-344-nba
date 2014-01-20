@@ -192,7 +192,8 @@ function searchControl ($scope, $http, $state, $location,  $anchorScroll) {
 
 	$scope.leaveSearch = function() {
 		console.log("defocused");
-		$scope.searchFocused = true;
+		$scope.searchFocused = false;
+		$scope.selectedPlayer = "";
 	};
 
 }
