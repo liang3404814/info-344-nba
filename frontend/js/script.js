@@ -41,15 +41,15 @@ nbaApp.directive('nbaPlayerNewsImage', function(){
 			var url = "http://searchapp2.nba.com/nba-search/query.jsp";
 			$http.jsonp(url, {
 				params: {
-				"text": name, 
-				"type": "playerpage",
-				"start": 1,
-				"npp": 20,
-				"site": "nba",
-				"hide": "true",
-				"sort": "relevance",
-				"output": "jsonp" }
-			});
+					"text": name, 
+					"type": "playerpage",
+					"start": 1,
+					"npp": 20,
+					"site": "nba",
+					"hide": "true",
+					"sort": "relevance",
+					"output": "jsonp" }
+				});
 
 			// Yes, the NBA api doens't respond to callback function name settings...
 			// can't complain since it's an internal API.
@@ -62,9 +62,7 @@ nbaApp.directive('nbaPlayerNewsImage', function(){
 				var cleanedresults = [];
 
 				for (var i = 0; i < results.length; i++) {
-					results[i] = results[i]["metadata"];
-					results[i] = results[i]['media'];
-					var uri = results[i]["600x336"]["uri"];
+					var uri = results[i]["metadata"]['media']["600x336"]["uri"];
 					if (uri != "") {
 						cleanedresults.push(uri);
 					}
@@ -91,7 +89,7 @@ nbaApp.directive('nbaPlayerNewsImage', function(){
 		// restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
 		templateUrl: 'templates/player-news-images.html',
 		// templateUrl: '',
-		replace: true
+		// replace: true
 		// transclude: true,
 		// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
 	};
@@ -115,29 +113,28 @@ nbaApp.config(function($stateProvider, $urlRouterProvider) {
 			playerDetails: function($http, $stateParams) {
 				var playerId = $stateParams.playerId;
 				return $http.get('../backend/players-api.php?action=get_player&id=' + playerId);
-				// return $http.get('../backend/players-api.php', {
-				// 	params: {"action": "get_player", "id": playerID
-				// 	}
-				// });
-}
-},
-controller: function($scope, $http, playerDetails) {
-	$scope.playerDetails = playerDetails.data[0];
-}
-})
+			}
+		},
+		controller: function($scope, $http, playerDetails) {
+			$scope.playerDetails = playerDetails.data[0];
+		}
+	})
 });
 
 nbaApp.config(['ngProgressLiteProvider', function(ngProgressLiteProvider) {
 	//ngProgressLiteProvider.settings.speed = 1500;
 }]);
 
-nbaApp.run(function($rootScope, ngProgressLite, $timeout) {
+nbaApp.run(function($rootScope, $timeout, $window, $location, $anchorScroll, ngProgressLite) {
 	$rootScope.$on('$stateChangeStart', function() {
 		ngProgressLite.start();
 		
 	})
 
 	$rootScope.$on('$stateChangeSuccess', function() {
+		console.log("moving!");
+		$location.hash('player-profile');
+		$anchorScroll();
 		ngProgressLite.done();
 	})
 });
@@ -184,9 +181,6 @@ $scope.onSelect = function($item, $model, $label) {
 	}
 
 	$state.go('playerDetailView', params);
-
-	$location.hash('main-content');
-	$anchorScroll();
 }
 
 }
