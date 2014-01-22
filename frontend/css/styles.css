@@ -81,7 +81,6 @@ body {
 	transition: all .3s ease-out;
 }
 
-
 .player-profile {
 	background-color: #29A6FF;
 	/*min-height: 400px;*/	
@@ -107,6 +106,24 @@ body {
 	width: 20%;
 }
 
+
+/*Responsive Youtube iframe embed trick, courtesy of http://webdesignerwall.com/demo/elastic-videos/ */
+.video-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	margin-bottom: -30%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+	display: inline-block;
+	width: 33.33%;
+}
+.video-container iframe,  
+.video-container object,  
+.video-container embed {
+	width: 100%;
+	height: 40%
+}
 
 footer {
 	margin-top: 30px;

@@ -5,6 +5,61 @@ var nbaApp = /**
 */
 angular.module('nbaApp', ['ui.router', 'ui.bootstrap', 'ngProgressLite']);
 
+nbaApp.directive('youtubeVideo', function(){
+	// Runs during compile
+	return {
+		// name: '',
+		// priority: 1,
+		// terminal: true,
+		// scope: {}, // {} = isolate, true = child, false/undefined = no change
+		// controller: function($scope, $element, $attrs, $transclude) {},
+		// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
+		restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
+		// template: '',
+		// templateUrl: '',
+		replace: true,
+		// transclude: true,
+		// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
+		link: function($scope, iElm, iAttrs, controller) {
+			
+		},
+		scope: {
+			videoCode: '@videoCode'
+		},
+		templateUrl: 'templates/youtube-embed.html',
+		controller: function($scope) {
+			$scope.videoUrl = "http://www.youtube.com/embed/" + $scope.videoCode;
+		}
+	};
+});
+
+nbaApp.directive('nbaPlayerYoutubeVideo', function() {
+	// http://gdata.youtube.com/feeds/api/videos?q=puppy&alt=json&max-results=30&format=5
+
+	return {
+		replace: true,
+		restrict: 'E',
+		scope: {
+			playerName: '@playerName'
+		},
+		templateUrl: 'templates/youtube-grid.html',
+		controller: function($scope, $http) {
+			var url = "http://gdata.youtube.com/feeds/api/videos?q=" + $scope.playerName + "&alt=jsonc&max-results=9&v=2";
+			// var name = $scope.playerName.toLowerCase().split(' ').join('_');
+			
+
+			$http.get(url).success(function(data) {
+				var videoIDs = [];
+				for (var i = 0; i < data["data"]["items"].length; i++) {
+					videoIDs.push(data["data"]["items"][i]["id"]);
+				};
+				$scope.videoIDs = videoIDs;
+				console.log($scope.videoIDs);
+			});
+		}
+	}
+})
+
 nbaApp.directive('nbaPlayerHeadImage', function() {
 
 	return {
@@ -95,7 +150,6 @@ nbaApp.directive('nbaPlayerNewsImage', function(){
 	};
 });
 
-
 nbaApp.config(function($stateProvider, $urlRouterProvider) {
 
 	$urlRouterProvider.otherwise('/');
@@ -121,6 +175,15 @@ nbaApp.config(function($stateProvider, $urlRouterProvider) {
 	})
 });
 
+nbaApp.config(function ($sceDelegateProvider) {
+  $sceDelegateProvider.resourceUrlWhitelist([
+  		'self',
+  		'http://i.cdn.turner.com/nba/nba**',
+  		'http://www.youtube.com/embed/**'
+  	]
+  	);
+});
+
 nbaApp.config(['ngProgressLiteProvider', function(ngProgressLiteProvider) {
 	//ngProgressLiteProvider.settings.speed = 1500;
 }]);
@@ -140,10 +203,10 @@ nbaApp.run(function($rootScope, $timeout, $window, $location, $anchorScroll, ngP
 });
 
 
-function playerDetailControl () {
-	// pictures: http://searchapp2.nba.com/nba-search/query.jsp?text=tony+allen&type=playerpage&start=1&npp=10&site=nba&hide=true&sort=relevance&output=json
-	// articles: http://searchapp2.nba.com/nba-search/query.jsp?text=%22tony+allen%22&type=article&start=1&npp=50&site=nba&hide=true&sort=relevance&output=json
-}
+// function playerDetailControl () {
+// 	// pictures: http://searchapp2.nba.com/nba-search/query.jsp?text=tony+allen&type=playerpage&start=1&npp=10&site=nba&hide=true&sort=relevance&output=json
+// 	// articles: http://searchapp2.nba.com/nba-search/query.jsp?text=%22tony+allen%22&type=article&start=1&npp=50&site=nba&hide=true&sort=relevance&output=json
+// }
 
 
 function searchControl ($scope, $http, $state, $location,  $anchorScroll) {
