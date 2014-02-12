@@ -11,14 +11,6 @@
 
 	</head>
 	<body>
-		<header>
-			<!-- <nav class="navbar navbar-default" role="navigation">
-				<div class="navbar-header">
-					<a href="#" class="navbar-brand">NBAInsight</a>
-					<p class="navbar-text">The last place you need to remember for NBA stats and insights</p>
-				</div>
-			</nav> -->
-		</header>
 
 		<div class="nba-stat-container" ng-controller="searchControl">
 			<div class="container">
@@ -32,9 +24,6 @@
 						<input type="text" class="form-control" placeholder="Type in an NBA player." ng-model="selectedPlayer" typeahead="player as player.fullName for player in fuzzy_matched_players($viewValue) | limitTo: 8" typeahead-editable='false' typeahead-on-select="onSelect($item, $model, $label)" ng-focus="focusSearch()" ng-blur="leaveSearch()">
 					</div>
 				</div>
-				<!-- <div class="row">
-					<h3 class="text-center">You selected: {{selectedPlayer.fullName}} ({{selectedPlayer.id}})</h3>
-				</div> -->
 			</div>
 		</div>
 

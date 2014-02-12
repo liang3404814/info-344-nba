@@ -5,10 +5,10 @@ class Database {
 	// makes sure errors are displayed in verbose mode
 
 	// DB connection Configuration
-	var $Host = "info344.cqgjsfqq3odg.us-west-2.rds.amazonaws.com";
-	var $Username = "info344user";
-	var $Password = "gyoku3404814";
-	var $DB_Name = "al_info344";
+	var $Host = "";
+	var $Username = "";
+	var $Password = "";
+	var $DB_Name = "";
 	var $Port = 3306;
 
 
